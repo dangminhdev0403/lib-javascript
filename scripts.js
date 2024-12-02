@@ -222,11 +222,7 @@ function createV0Loader() {
 }
 
 // Initialize the loader
-const v0Loader = createV0Loader();
 
- // Show loader
- v0Loader.show();
-    
 
 //  // Show with custom text
 //  v0Loader.show("Please wait...");
