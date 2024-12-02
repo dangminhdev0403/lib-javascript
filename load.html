@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Loader</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- <style>
+        #v0_premium_loader_wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+        }
+
+        .v0_premium_loader_content {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .v0_premium_loader_ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            mix-blend-mode: overlay;
+            animation: v0_premium_rotate 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        .v0_premium_loader_ring:nth-child(1) {
+            border-top-color: #000;
+            animation-delay: 0s;
+        }
+
+        .v0_premium_loader_ring:nth-child(2) {
+            border-right-color: #000;
+            animation-delay: 0.3s;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+        }
+
+        .v0_premium_loader_ring:nth-child(3) {
+            border-bottom-color: #000;
+            animation-delay: 0.6s;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+        }
+
+        .v0_premium_loader_text {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .v0_premium_loader_progress {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .v0_premium_loader_progress_bar {
+            width: 0%;
+            height: 100%;
+            background: #000;
+            transition: width 0.3s ease;
+        }
+
+        @keyframes v0_premium_rotate {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+            100% {
+                transform: rotateX(360deg) rotateY(180deg) rotateZ(360deg);
+            }
+        }
+
+        /* Particles */
+        .v0_premium_particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #000;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            #v0_premium_loader_wrapper {
+                background: rgba(0, 0, 0, 0.98);
+            }
+
+            .v0_premium_loader_ring:nth-child(1) { border-top-color: #fff; }
+            .v0_premium_loader_ring:nth-child(2) { border-right-color: #fff; }
+            .v0_premium_loader_ring:nth-child(3) { border-bottom-color: #fff; }
+
+            .v0_premium_loader_text {
+                color: #fff;
+            }
+
+            .v0_premium_loader_progress {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .v0_premium_loader_progress_bar {
+                background: #fff;
+            }
+
+            .v0_premium_particle {
+                background: #fff;
+            }
+        }
+    </style> -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="v0_premium_loader_wrapper">
+        <div class="v0_premium_loader_content">
+            <div class="v0_premium_loader_ring"></div>
+            <div class="v0_premium_loader_ring"></div>
+            <div class="v0_premium_loader_ring"></div>
+            <div class="v0_premium_loader_text">Loading...</div>
+            <div class="v0_premium_loader_progress">
+                <div class="v0_premium_loader_progress_bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+   
+</body>
+</html>
