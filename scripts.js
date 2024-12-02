@@ -222,7 +222,7 @@ function createV0Loader() {
 }
 
 // Initialize the loader
-const v0Loader = createV0Loader();
+// const v0Loader = createV0Loader();
 
  // Show loader
  // v0Loader.show();
