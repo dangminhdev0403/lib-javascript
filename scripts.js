@@ -225,7 +225,7 @@ function createV0Loader() {
 const v0Loader = createV0Loader();
 
  // Show loader
- v0Loader.show();
+ // v0Loader.show();
     
 
 //  // Show with custom text
