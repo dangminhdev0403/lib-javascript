@@ -1,321 +1,382 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thư Viện V0 Loader | Đặng Minh</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://dangminhdev0403.github.io/lib-javascript/scripts.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --primary: #000000;
-            --background: #ffffff;
-            --text: #333333;
-            --accent: #007bff;
-            --border: #e0e0e0;
-        }
+      :root {
+        --primary: #000000;
+        --background: #ffffff;
+        --text: #333333;
+        --accent: #007bff;
+        --border: #e0e0e0;
+      }
 
-        [data-theme='dark'] {
-            --primary: #ffffff;
-            --background: #111827;
-            --text: #ffffff;
-            --accent: #3b82f6;
-            --border: #2d3748;
-        }
+      [data-theme="dark"] {
+        --primary: #ffffff;
+        --background: #111827;
+        --text: #ffffff;
+        --accent: #3b82f6;
+        --border: #2d3748;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Be Vietnam Pro', sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Be Vietnam Pro", sans-serif;
+      }
 
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            transition: all 0.3s ease;
-            line-height: 1.6;
-        }
+      body {
+        background-color: var(--background);
+        color: var(--text);
+        transition: all 0.3s ease;
+        line-height: 1.6;
+      }
 
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background: linear-gradient(rgba(0, 0, 0, 0.05), transparent);
+        border-radius: 15px;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, var(--accent), var(--primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.8;
+      }
+
+      .theme-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: 2px solid var(--accent);
+        color: var(--text);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .theme-toggle:hover {
+        background: var(--accent);
+        color: var(--background);
+        transform: scale(1.05);
+      }
+
+      .demo-section {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .demo-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .code-block {
+        background: #1a1a1a;
+        color: #fff;
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin: 1rem 0;
+        overflow-x: auto;
+        position: relative;
+      }
+
+      .copy-button {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: var(--accent);
+        border: none;
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.8rem;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        margin: 1.5rem 0;
+        flex-wrap: wrap;
+      }
+
+      .demo-button {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        min-width: 200px;
+        text-align: center;
+      }
+
+      .demo-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .api-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .api-list li {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .api-list li:last-child {
+        border-bottom: none;
+      }
+
+      .method-name {
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      .footer {
+        margin-top: auto;
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        opacity: 0.7;
+        border-top: 1px solid var(--border);
+      }
+
+      @media (max-width: 768px) {
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
-            background: linear-gradient(rgba(0,0,0,0.05), transparent);
-            border-radius: 15px;
+          padding: 1rem;
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--accent), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: 2px solid var(--accent);
-            color: var(--text);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .theme-toggle:hover {
-            background: var(--accent);
-            color: var(--background);
-            transform: scale(1.05);
-        }
-
-        .demo-section {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .demo-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
-        }
-
-        .code-block {
-            background: #1a1a1a;
-            color: #fff;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .copy-button {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: var(--accent);
-            border: none;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
+          font-size: 2rem;
         }
 
         .demo-button {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            min-width: 200px;
-            text-align: center;
+          width: 100%;
         }
-
-        .demo-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .api-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .api-list li {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .api-list li:last-child {
-            border-bottom: none;
-        }
-
-        .method-name {
-            color: var(--accent);
-            font-weight: 500;
-        }
-
-        .footer {
-            margin-top: auto;
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            border-top: 1px solid var(--border);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .demo-button {
-                width: 100%;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1>Thư Viện V0 Loader</h1>
-            <p>Được phát triển bởi Đặng Minh</p>
-        </div>
+      <div class="header">
+        <h1>Thư Viện V0 Loader</h1>
+        <p>Được phát triển bởi Đặng Minh</p>
+      </div>
 
-        <div class="demo-section">
-            <h2>Cài Đặt</h2>
-            <div class="code-block">
-                <button class="copy-button" onclick="copyCode(this)">Sao chép</button>
-                <pre>&lt;script src="https://dangminhdev0403.github.io/lib-javascript/scripts.js"&gt;&lt;/script&gt;</pre>
-            </div>
+      <div class="demo-section">
+        <h2>Cài Đặt</h2>
+        <div class="code-block">
+          <button class="copy-button" onclick="copyCode(this)">Sao chép</button>
+          <pre>
+&lt;script src="https://dangminhdev0403.github.io/lib-javascript/scripts.js"&gt;&lt;/script&gt;</pre
+          >
         </div>
+      </div>
 
-        <div class="demo-section">
-            <h2>Cách Sử Dụng Cơ Bản</h2>
-            <div class="code-block">
-                <button class="copy-button" onclick="copyCode(this)">Sao chép</button>
-                <pre>const v0Loader = createV0Loader();</pre>
-            </div>
-            <div class="button-group">
-                <button class="demo-button" onclick="showBasicLoader()">Loader Cơ Bản</button>
-                <button class="demo-button" onclick="showCustomTextLoader()">Loader Với Chữ Tùy Chỉnh</button>
-                <button class="demo-button" onclick="showProgressLoader()">Loader Với Tiến Trình</button>
-            </div>
+      <div class="demo-section">
+        <h2>Cách Sử Dụng Cơ Bản</h2>
+        <div class="code-block">
+          <button class="copy-button" onclick="copyCode(this)">Sao chép</button>
+          <pre>const v0Loader = createV0Loader();</pre>
         </div>
-
-        <div class="demo-section">
-            <h2>Tài Liệu API</h2>
-            <ul class="api-list">
-                <li>
-                    <span class="method-name">v0Loader.show()</span>
-                    <span>Hiển thị loader mặc định</span>
-                </li>
-                <li>
-                    <span class="method-name">v0Loader.show("Văn bản")</span>
-                    <span>Hiển thị loader với văn bản tùy chỉnh</span>
-                </li>
-                <li>
-                    <span class="method-name">v0Loader.hide()</span>
-                    <span>Ẩn loader</span>
-                </li>
-                <li>
-                    <span class="method-name">v0Loader.setText("Văn bản mới")</span>
-                    <span>Cập nhật văn bản loader</span>
-                </li>
-                <li>
-                    <span class="method-name">v0Loader.setProgress(50)</span>
-                    <span>Đặt phần trăm tiến trình (0-50)</span>
-                </li>
-            </ul>
+        <div class="button-group">
+          <button class="demo-button" onclick="showBasicLoader()">
+            Loader Cơ Bản
+          </button>
+          <button class="demo-button" onclick="showCustomTextLoader()">
+            Loader Với Chữ Tùy Chỉnh
+          </button>
+          <button class="demo-button" onclick="showProgressLoader()">
+            Loader Với Tiến Trình
+          </button>
         </div>
+      </div>
 
-        <footer class="footer">
-            © 2024 Thư Viện V0 Loader - Đặng Minh. Đã đăng ký bản quyền.
-        </footer>
+      <div class="demo-section">
+        <h2>Tài Liệu API</h2>
+        <ul class="api-list">
+          <li>
+            <span class="method-name">v0Loader.show()</span>
+            <span>Hiển thị loader mặc định</span>
+          </li>
+          <li>
+            <span class="method-name">v0Loader.show("Văn bản")</span>
+            <span>Hiển thị loader với văn bản tùy chỉnh</span>
+          </li>
+          <li>
+            <span class="method-name">v0Loader.hide()</span>
+            <span>Ẩn loader</span>
+          </li>
+          <li>
+            <span class="method-name">v0Loader.setText("Văn bản mới")</span>
+            <span>Cập nhật văn bản loader</span>
+          </li>
+          <li>
+            <span class="method-name">v0Loader.setProgress(50)</span>
+            <span>Đặt phần trăm tiến trình (0-50)</span>
+          </li>
+        </ul>
+      </div>
+
+      <footer class="footer">
+        © 2024 Thư Viện V0 Loader - Đặng Minh. Đã đăng ký bản quyền.
+      </footer>
     </div>
 
     <script>
-        const v0Loader = createV0Loader();
+      const v0Loader = createV0Loader();
 
-        function toggleTheme() {
-            document.body.setAttribute('data-theme', 
-                document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-        }
+      function toggleTheme() {
+        document.body.setAttribute(
+          "data-theme",
+          document.body.getAttribute("data-theme") === "dark" ? "light" : "dark"
+        );
+      }
 
-        function copyCode(button) {
-            const codeBlock = button.nextElementSibling;
-            navigator.clipboard.writeText(codeBlock.textContent);
-            button.textContent = 'Đã sao chép!';
-            setTimeout(() => button.textContent = 'Sao chép', 2000);
-        }
+      function showBasicLoader() {
+        v0Loader.show("Đang tải...");
+        setTimeout(() => v0Loader.hide(), 3000);
+      }
 
-        function showBasicLoader() {
-            v0Loader.show('Đang tải...');
-            setTimeout(() => v0Loader.hide(), 3000);
-        }
+      function showCustomTextLoader() {
+        v0Loader.show("Đang xử lý...");
+        setTimeout(() => {
+          v0Loader.setText("Sắp hoàn thành...");
+          setTimeout(() => v0Loader.hide(), 1500);
+        }, 1500);
+      }
 
-        function showCustomTextLoader() {
-            v0Loader.show("Đang xử lý...");
-            setTimeout(() => {
-                v0Loader.setText("Sắp hoàn thành...");
-                setTimeout(() => v0Loader.hide(), 1500);
-            }, 1500);
-        }
+      function showProgressLoader() {
+        v0Loader.show("Đang tải dữ liệu...");
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 10;
+          v0Loader.setProgress(progress);
+          if (progress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => v0Loader.hide(), 500);
+          }
+        }, 300);
+      }
 
-        function showProgressLoader() {
-            v0Loader.show("Đang tải dữ liệu...");
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 10;
-                v0Loader.setProgress(progress);
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => v0Loader.hide(), 500);
-                }
-            }, 300);
-        }
+      // Hiệu ứng xuất hiện
+      anime({
+        targets: ".demo-section",
+        translateY: [20, 0],
+        opacity: [0, 1],
+        duration: 800,
+        delay: anime.stagger(200),
+        easing: "easeOutQuad",
+      });
 
-        // Hiệu ứng xuất hiện
-        anime({
-            targets: '.demo-section',
-            translateY: [20, 0],
-            opacity: [0, 1],
-            duration: 800,
-            delay: anime.stagger(200),
-            easing: 'easeOutQuad'
-        });
-
-        // Hiệu ứng cho header
-        anime({
-            targets: '.header',
-            scale: [0.9, 1],
-            opacity: [0, 1],
-            duration: 1000,
-            easing: 'easeOutElastic(1, .8)'
-        });
+      // Hiệu ứng cho header
+      anime({
+        targets: ".header",
+        scale: [0.9, 1],
+        opacity: [0, 1],
+        duration: 1000,
+        easing: "easeOutElastic(1, .8)",
+      });
     </script>
-</body>
+
+    <script>
+      function copyCode(button) {
+        const codeBlock = button.nextElementSibling;
+        const text = codeBlock.textContent || codeBlock.innerText;
+
+        // Create temporary textarea
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+
+        // Select and copy
+        textarea.select();
+        try {
+          // Modern way
+          navigator.clipboard.writeText(text).then(() => {
+            button.textContent = "Đã sao chép!";
+            // Add animation using anime.js
+            anime({
+              targets: button,
+              scale: [1, 1.2, 1],
+              duration: 600,
+              easing: "easeInOutQuad",
+            });
+          });
+        } catch (err) {
+          // Fallback for older browsers
+          document.execCommand("copy");
+          button.textContent = "Đã sao chép!";
+        }
+
+        // Cleanup
+        document.body.removeChild(textarea);
+
+        // Reset button text with animation
+        setTimeout(() => {
+          button.textContent = "Sao chép";
+          anime({
+            targets: button,
+            scale: [1, 0.9, 1],
+            duration: 400,
+            easing: "easeInOutQuad",
+          });
+        }, 2000);
+      }
+
+      // Add click event listeners to all copy buttons
+      document.addEventListener("DOMContentLoaded", () => {
+        const copyButtons = document.querySelectorAll(".copy-button");
+        copyButtons.forEach((button) => {
+          button.addEventListener("click", () => copyCode(button));
+        });
+      });
+    </script>
+  </body>
 </html>
