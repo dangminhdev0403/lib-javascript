@@ -227,13 +227,14 @@ const v0Loader = createV0Loader();
  // Show loader
  v0Loader.show();
     
+
 //  // Show with custom text
 //  v0Loader.show("Please wait...");
  
 //  // Hide loader
 //  v0Loader.hide();
  
-//  // Set specific progress
+
 //  v0Loader.setProgress(50);
  
 //  // Change text
