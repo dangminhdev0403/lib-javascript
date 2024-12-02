@@ -267,62 +267,8 @@
       </footer>
     </div>
 
-    <script>
-      const v0Loader = createV0Loader();
-
-      function toggleTheme() {
-        document.body.setAttribute(
-          "data-theme",
-          document.body.getAttribute("data-theme") === "dark" ? "light" : "dark"
-        );
-      }
-
-      function showBasicLoader() {
-        v0Loader.show("Đang tải...");
-        setTimeout(() => v0Loader.hide(), 3000);
-      }
-
-      function showCustomTextLoader() {
-        v0Loader.show("Đang xử lý...");
-        setTimeout(() => {
-          v0Loader.setText("Sắp hoàn thành...");
-          setTimeout(() => v0Loader.hide(), 1500);
-        }, 1500);
-      }
-
-      function showProgressLoader() {
-        v0Loader.show("Đang tải dữ liệu...");
-        let progress = 0;
-        const interval = setInterval(() => {
-          progress += 10;
-          v0Loader.setProgress(progress);
-          if (progress >= 100) {
-            clearInterval(interval);
-            setTimeout(() => v0Loader.hide(), 500);
-          }
-        }, 300);
-      }
-
-      // Hiệu ứng xuất hiện
-      anime({
-        targets: ".demo-section",
-        translateY: [20, 0],
-        opacity: [0, 1],
-        duration: 800,
-        delay: anime.stagger(200),
-        easing: "easeOutQuad",
-      });
-
-      // Hiệu ứng cho header
-      anime({
-        targets: ".header",
-        scale: [0.9, 1],
-        opacity: [0, 1],
-        duration: 1000,
-        easing: "easeOutElastic(1, .8)",
-      });
-    </script>
-
+  
+    <script src="./scripts.js"></script>
     <script>
       function copyCode(button) {
         const codeBlock = button.nextElementSibling;
@@ -378,5 +324,7 @@
         });
       });
     </script>
+
+
   </body>
 </html>
